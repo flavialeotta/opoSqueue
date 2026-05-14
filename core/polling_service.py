@@ -15,9 +15,8 @@ class PollingService:
 
         while self.running:
             try:
-                raw_jobs = await self.ssh.run_command("squeue --noheader --format='%i|%P|%j|%u|%T|%M|%D|%R'")
-
-                raw_nodes = await self.ssh.run_command("sinfo -N --noheader -o '%N|%P|%T|%c'")
+                raw_jobs = await self.ssh.run_command("squeue --noheader --format='%i|%P|%j|%u|%T|%M|%N|%C|%R'")
+                raw_nodes = await self.ssh.run_command("sinfo -N --noheader -o '%N|%P|%T|%C'")
 
                 jobs = parse_squeue(raw_jobs)
                 nodes = parse_sinfo(raw_nodes)

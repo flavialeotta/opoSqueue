@@ -6,13 +6,13 @@ DELIMITER = "|"
 
 def parse_squeue(raw: str):
     jobs = []
-
     lines = raw.strip().splitlines()
 
     for line in lines:
         parts = line.split(DELIMITER)
 
-        if len(parts) != 8:
+        # We expect 9 parts now because we'll add CPU count to the command
+        if len(parts) != 9:
             continue
 
         jobs.append(
@@ -23,31 +23,32 @@ def parse_squeue(raw: str):
                 user=parts[3],
                 state=parts[4],
                 runtime=parts[5],
-                nodes=int(parts[6]),
-                reason=parts[7],
+                nodes=parts[6],   # This will now be the node list (e.g., "node01")
+                cpus=int(parts[7]), # New field
+                reason=parts[8],
             )
         )
-
     return jobs
 
 def parse_sinfo(raw: str):
     nodes = []
-
     lines = raw.strip().splitlines()
 
     for line in lines:
         parts = line.split("|")
-
         if len(parts) != 4:
             continue
 
+        # parts[3] is "Alloc/Idle/Other/Total" (e.g., "4/24/0/28")
+        cpu_data = parts[3].split("/")
+        
         nodes.append(
             Node(
                 name=parts[0],
                 partition=parts[1],
                 state=parts[2],
-                cpus_total=int(parts[3]),
+                cpus_alloc=int(cpu_data[0]), # First number is allocated
+                cpus_total=int(cpu_data[3]), # Last number is total
             )
         )
-
     return nodes

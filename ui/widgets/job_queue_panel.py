@@ -10,32 +10,22 @@ from core.state_store import state_store
 class JobQueuePanel(QWidget):
     def __init__(self):
         super().__init__()
-
-        self.layout = QVBoxLayout()
-
-        self.setLayout(self.layout)
-
+        # Use a name other than self.layout!
+        self.side_layout = QVBoxLayout()
+        self.setLayout(self.side_layout)
+        
+        # Connect to the store
         state_store.jobs_updated.connect(self.refresh)
 
     def refresh(self):
-        for i in reversed(range(self.layout.count())):
-            widget = self.layout.itemAt(i).widget()
+        # Clear existing labels
+        while self.side_layout.count():
+            child = self.side_layout.takeAt(0)
+            if child.widget(): child.widget().deleteLater()
 
-            if widget:
-                widget.deleteLater()
-
-        queued_jobs = [
-            job for job in state_store.jobs
-            if "PENDING" in job.state
-        ]
-
-        title = QLabel("QUEUED JOBS")
-
-        self.layout.addWidget(title)
-
-        for job in queued_jobs:
-            label = QLabel(
-                f"{job.name} ({job.user})"
-            )
-
-            self.layout.addWidget(label)
+        # Add the jobs with their runtimes
+        for job in state_store.jobs:
+            color = "#FFD700" if job.state == "RUNNING" else "#FFFFFF"
+            lbl = QLabel(f"[{job.job_id}] {job.user} | {job.runtime}")
+            lbl.setStyleSheet(f"color: {color}; font-size: 10px;")
+            self.side_layout.addWidget(lbl)

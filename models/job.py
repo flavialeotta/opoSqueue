@@ -8,5 +8,6 @@ class Job(BaseModel):
     user: str
     state: str
     runtime: str
-    nodes: int
+    nodes: str  # Changed from int to str to hold node names like "node01"
+    cpus: int   # Add this to track resource usage
     reason: str
