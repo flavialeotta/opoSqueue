@@ -10,20 +10,26 @@ from ui.windows.title_screen import TitleScreen
 
 async def main():
     app = QApplication(sys.argv)
-
-    loop = QEventLoop(app)
-    asyncio.set_event_loop(loop)
-
     window = TitleScreen()
-    window.resize(480, 320)
     window.show()
 
+    while True:
+        app.processEvents()
+        await asyncio.sleep(0.01)
+        
+        # Check our custom flag OR if the X was clicked
+        if window.should_exit or not window.isVisible():
+            break
     
-
-    with loop:
-        loop.run_forever()
-
-
+    # After the loop breaks, we force the cleanup
+    app.quit()
+    
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        pass
+    finally:
+        print("Opossum is going to sleep. Goodbye!")
+
     
