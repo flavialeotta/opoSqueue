@@ -1,0 +1,6 @@
+__pycache__/
+ui/widgets/__pycache__/
+ui/windows/__pycache__/
+storage/profiles/*
+models/__pycache__/
+core/__pycache__/
