@@ -26,10 +26,8 @@ dependencies = [
 ]
 
 [project.scripts]
-oposqueue = "oposqueue.main:main"
+oposqueue = "main:main"
 
 [tool.setuptools]
+packages = ["core", "models", "ui"]
 py-modules = ["main"]
-
-[tool.setuptools.packages.find]
-include = ["oposqueue", "oposqueue.*"]
