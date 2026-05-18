@@ -30,12 +30,12 @@ oposqueue
 
 and you're good to go! It will open the following window:
 
-<img src="src/oposqueue/storage/static/main_window.png" alt="main page" width="600"/>
+<img src="src/oposqueue/storage/static/main_window.png" alt="main page" width="500"/>
 
 ### Save your connection details
 To start a new connection, click on "New Connection. This button will redirect you to the following window:
 
-<img src="src/oposqueue/storage/static/new_connection.png" alt="new connection" width="600"/>
+<img src="src/oposqueue/storage/static/new_connection.png" alt="new connection" width="500"/>
 
 and you can fill in the required fields:
 
@@ -201,7 +201,7 @@ When trying to install opoSqueue, if the computer doesn't have Python's package 
 ```bash
 python3 -m pip install git+https://github.com/flavialeotta/opoSqueue.git --user
 ```
-If this will also fail, it might be due to a version of Python that is too old (<3.11>) so please check your Python version and update if needed.
+If this will also fail, it might be due to a version of Python that is too old (<3.11) so please check your Python version and update if needed.
 
 If you are located on a server, though, and have admin restrictions that prevent you from updating Python, I warmly suggest you to use opoSqueue on your personal computer and remotely connect to the server through the app itself.
 
@@ -211,7 +211,7 @@ This error occurs when you try to run opoSqueue on a server or remote machine wi
 
 It is vividly recommended to install and run opoSqueue on your local computer (Windows, macOS, or Linux desktop), then use opoSqueue itself to connect to and monitor the remote cluster.
 
-If you must run on a remote server, on the internet there are guides on how to set up a desktop-enabled remote session using X11 forwarding (`ssh -X user@server`), VNC (Virtual Network Computing) or graphical remote desktop application (RDP, TeamViewer, etc.). I have not personally tried these solutions yet so I cannot personally recommend this approach.
+If you must run on a remote server, on the internet there are guides on how to set up a desktop-enabled remote session using X11 forwarding (`ssh -X user@server`), VNC (Virtual Network Computing) or graphical remote desktop application (RDP, TeamViewer, etc.). I have not tried these solutions yet so I cannot personally recommend this approach.
 
 ## 5. Contacts
 For any type of inquiries, bug reports, or feature requests, you can contact me at:
