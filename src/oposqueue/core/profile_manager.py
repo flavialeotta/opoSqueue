@@ -39,9 +39,16 @@ class ProfileManager:
             json.dump(data, f, indent=4)
 
     def delete_profile(self, profile_name):
-        profiles = self.load_profiles()
-        profiles = [p for p in profiles if p.name != profile_name]
-        with open(self.filename, "w") as f:
-            json.dump([p.dict() if hasattr(p, 'dict') else p.__dict__ for p in profiles], f, indent=4)
+        filename = f"{profile_name.replace(' ', '_').lower()}.json"
+        path = os.path.join(self.directory, filename)
+        
+        if os.path.exists(path):
+            try:
+                os.remove(path)
+                print(f"Successfully deleted profile file: {path}")
+            except Exception as e:
+                print(f"Error trying to delete profile file {filename}: {e}")
+        else:
+            print(f"Could not delete profile: {path} does not exist.")
 
 profile_manager = ProfileManager()
