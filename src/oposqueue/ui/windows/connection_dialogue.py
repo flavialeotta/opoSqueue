@@ -13,8 +13,8 @@ from oposqueue.core.profile_manager import *
 from oposqueue.core.asset_path import get_asset_path
 
 class ConnectionDialog(QWidget):
-    def __init__(self, on_connect):
-        super().__init__()
+    def __init__(self, on_connect, parent=None):
+        super().__init__(parent)
 
         self.on_connect = on_connect
         self.setWindowTitle("New Connection")
