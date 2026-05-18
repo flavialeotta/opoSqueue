@@ -7,7 +7,7 @@ class CustomFont():
         # Safety check: if font_id is -1, the file wasn't found/loaded
         if self.font_id == -1:
             print(f"Warning: Could not load font at {tff_path}")
-            self.pixel_font = QFont("Courier", size) # Fallback font
+            self.pixel_font = QFont("Courier", size)
             return
 
         families = QFontDatabase.applicationFontFamilies(self.font_id)

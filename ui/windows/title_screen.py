@@ -19,6 +19,8 @@ from core.polling_service import PollingService
 from ui.windows.cluster_view import ClusterView
 from ui.widgets.fonts import CustomFont
 
+from core.asset_path import get_asset_path
+
 # Title Screen is defined as a child of class QWidget
 class TitleScreen(QWidget): 
     def __init__(self):
@@ -32,8 +34,8 @@ class TitleScreen(QWidget):
         # Initialize window layout
         layout = QVBoxLayout()
 
-        self.title_font = CustomFont("ui/fonts/BoldPixels.ttf", size=50)
-        self.objs_font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=12)
+        self.title_font = CustomFont(get_asset_path("ui/fonts/BoldPixels.ttf"), size=50)
+        self.objs_font = CustomFont(get_asset_path("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf"), size=12)
 
         # Add a title
         title = QLabel("opoSqueue")
@@ -46,7 +48,9 @@ class TitleScreen(QWidget):
         # Check first if there are any connections saved:
         self.continue_button = QPushButton("Continue")
         self.continue_button.setFont(self.objs_font.pixel_font)
-        connections_saved = [f for f in os.listdir("storage/profiles") if f.endswith('.json')]
+
+        profiles_dir = get_asset_path("storage/profiles")
+        connections_saved = [f for f in os.listdir(profiles_dir) if f.endswith('.json')]
         
         if not connections_saved:
             self.continue_button.setVisible(False)
@@ -72,7 +76,7 @@ class TitleScreen(QWidget):
         self.gif_label.setAlignment(Qt.AlignCenter)
 
         # Load the movie
-        self.movie = QMovie("ui/sprites/opossum_sprite.gif")
+        self.movie = QMovie(get_asset_path("ui/sprites/opossum_sprite.gif"))
         # Scaler
         self.movie.setCacheMode(QMovie.CacheAll)
 

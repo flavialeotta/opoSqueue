@@ -3,13 +3,14 @@ from PySide6.QtCore import Qt
 from core.profile_manager import profile_manager
 from ui.widgets.save_slot_widget import SaveSlotWidget
 from ui.widgets.fonts import CustomFont
+from core.asset_path import get_asset_path
 
 class SaveSelectScreen(QWidget):
     def __init__(self, on_profile_selected, on_back):
         super().__init__()
         self.on_profile_selected = on_profile_selected
-        self.on_back = on_back # We store the back function
-        self.objs_font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=12)
+        self.on_back = on_back
+        self.objs_font = CustomFont(get_asset_path("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf"), size=12)
         
         self.main_layout = QVBoxLayout()
         self.setLayout(self.main_layout)

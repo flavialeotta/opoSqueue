@@ -2,8 +2,10 @@ import os
 import json
 from models.ssh_profile import SSHProfile
 
+from core.asset_path import get_asset_path
+
 class ProfileManager:
-    def __init__(self, directory="storage/profiles/"):
+    def __init__(self, directory=get_asset_path("storage/profiles/")):
         self.directory = directory
         # Create the folder if it doesn't exist
         if not os.path.exists(self.directory):

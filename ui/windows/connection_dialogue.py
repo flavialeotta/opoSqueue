@@ -11,6 +11,8 @@ from ui.widgets.fonts import CustomFont # Import your font tool
 from models.ssh_profile import SSHProfile
 from core.profile_manager import *
 
+from core.asset_path import get_asset_path
+
 class ConnectionDialog(QWidget):
     def __init__(self, on_connect):
         super().__init__()
@@ -18,10 +20,10 @@ class ConnectionDialog(QWidget):
         self.on_connect = on_connect
         self.setWindowTitle("New Connection")
 
-        self.objs_font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=12)
+        self.objs_font = CustomFont(get_asset_path("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf"), size=12)
         pixel_font = self.objs_font.pixel_font
 
-        self.title_font = CustomFont("ui/fonts/BoldPixels.ttf", size=30)
+        self.title_font = CustomFont(get_asset_path("ui/fonts/BoldPixels.ttf"), size=30)
         title_font = self.title_font.pixel_font
 
         layout = QVBoxLayout()

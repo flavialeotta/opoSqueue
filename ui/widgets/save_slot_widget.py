@@ -1,12 +1,13 @@
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QPushButton, QLabel
 from ui.widgets.fonts import CustomFont
 from core.profile_manager import *
+from core.asset_path import get_asset_path
 
 class SaveSlotWidget(QFrame):
     def __init__(self, profile, on_connect):
         super().__init__()
         layout = QHBoxLayout()
-        font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=10).pixel_font
+        font = CustomFont(get_asset_path("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf"), size=10).pixel_font
         
         name_lbl = QLabel(f"{profile.name} ({profile.host})")
         name_lbl.setFont(font)

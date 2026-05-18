@@ -8,10 +8,12 @@ from ui.widgets.node_tile import NodeTile
 from ui.widgets.fonts import CustomFont
 from ui.widgets.job_queue_panel import JobQueuePanel
 
+from core.asset_path import get_asset_path
+
 class ClusterView(QWidget):
     def __init__(self):
         super().__init__()
-        self.objs_font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=12)
+        self.objs_font = CustomFont(get_asset_path("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf"), size=12)
 
         self.main_container = QVBoxLayout()
         
