@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QPushButton, QLabel
-from ui.widgets.fonts import CustomFont
-from core.profile_manager import *
-from core.asset_path import get_asset_path
+from oposqueue.ui.widgets.fonts import CustomFont
+from oposqueue.core.profile_manager import *
+from oposqueue.core.asset_path import get_asset_path
 
 class SaveSlotWidget(QFrame):
     def __init__(self, profile, on_connect):

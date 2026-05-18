@@ -3,12 +3,12 @@ from PySide6.QtWidgets import (
     QPushButton, QLineEdit, QLabel, QScrollArea
 )
 from PySide6.QtCore import Qt
-from core.state_store import state_store
-from ui.widgets.node_tile import NodeTile
-from ui.widgets.fonts import CustomFont
-from ui.widgets.job_queue_panel import JobQueuePanel
+from oposqueue.core.state_store import state_store
+from oposqueue.ui.widgets.node_tile import NodeTile
+from oposqueue.ui.widgets.fonts import CustomFont
+from oposqueue.ui.widgets.job_queue_panel import JobQueuePanel
 
-from core.asset_path import get_asset_path
+from oposqueue.core.asset_path import get_asset_path
 
 class ClusterView(QWidget):
     def __init__(self):

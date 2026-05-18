@@ -7,11 +7,10 @@ from PySide6.QtWidgets import (
     QCheckBox,
 )
 from PySide6.QtCore import Qt
-from ui.widgets.fonts import CustomFont # Import your font tool
-from models.ssh_profile import SSHProfile
-from core.profile_manager import *
-
-from core.asset_path import get_asset_path
+from oposqueue.ui.widgets.fonts import CustomFont
+from oposqueue.models.ssh_profile import SSHProfile
+from oposqueue.core.profile_manager import *
+from oposqueue.core.asset_path import get_asset_path
 
 class ConnectionDialog(QWidget):
     def __init__(self, on_connect):

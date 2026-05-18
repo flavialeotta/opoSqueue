@@ -4,7 +4,7 @@ from PySide6.QtWidgets import (
     QLabel,
 )
 
-from core.state_store import state_store
+from oposqueue.core.state_store import state_store
 
 
 class JobQueuePanel(QWidget):

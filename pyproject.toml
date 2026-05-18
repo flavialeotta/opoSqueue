@@ -26,8 +26,14 @@ dependencies = [
 ]
 
 [project.scripts]
-oposqueue = "main:main"
+oposqueue = "oposqueue.main:main"
 
 [tool.setuptools]
-packages = ["core", "models", "ui"]
-py-modules = ["main"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"oposqueue.ui" = ["**/*.ttf", "**/*.gif", "**/*.png", "**/*.piskel"]
+"oposqueue.storage" = ["**/*.json", "**/.gitkeep"]

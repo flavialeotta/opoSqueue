@@ -1,15 +1,15 @@
-import os
 import sys
 import asyncio
-from core.ssh_manager import SSHManager
-from core.polling_service import PollingService
+
 from PySide6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QInputDialog, QLineEdit, QPushButton
 from qasync import QEventLoop
 
-from ui.windows.title_screen import TitleScreen
-from ui.windows.connection_dialogue import ConnectionDialog 
-from ui.windows.cluster_view import ClusterView
-from ui.windows.save_select_screen import *
+from oposqueue.ui.windows.title_screen import TitleScreen
+from oposqueue.ui.windows.connection_dialogue import ConnectionDialog 
+from oposqueue.ui.windows.cluster_view import ClusterView
+from oposqueue.ui.windows.save_select_screen import *
+from oposqueue.core.ssh_manager import SSHManager
+from oposqueue.core.polling_service import PollingService
 
 class MainWindow(QMainWindow):
     def __init__(self):

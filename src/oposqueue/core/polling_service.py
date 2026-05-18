@@ -1,7 +1,7 @@
 import asyncio
 
-from core.state_store import state_store
-from core.slurm_parser import parse_squeue, parse_sinfo
+from oposqueue.core.state_store import state_store
+from oposqueue.core.slurm_parser import parse_squeue, parse_sinfo
 
 
 

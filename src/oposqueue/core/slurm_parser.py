@@ -1,5 +1,5 @@
-from models.job import Job
-from models.node import Node
+from oposqueue.models.job import Job
+from oposqueue.models.node import Node
 
 DELIMITER = "|"
 

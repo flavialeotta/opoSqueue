@@ -12,12 +12,12 @@ import asyncio
 import os
 import webbrowser
 
-from ui.windows.connection_dialogue import ConnectionDialog
-from ui.windows.save_select_screen import SaveSelectScreen
-from core.ssh_manager import SSHManager
-from core.polling_service import PollingService
-from ui.windows.cluster_view import ClusterView
-from ui.widgets.fonts import CustomFont
+from oposqueue.ui.windows.connection_dialogue import ConnectionDialog
+from oposqueue.ui.windows.save_select_screen import SaveSelectScreen
+from oposqueue.core.ssh_manager import SSHManager
+from oposqueue.core.polling_service import PollingService
+from oposqueue.ui.windows.cluster_view import ClusterView
+from oposqueue.ui.widgets.fonts import CustomFont
 
 from core.asset_path import get_asset_path
 

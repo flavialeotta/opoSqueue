@@ -1,8 +1,8 @@
 import os
 import json
-from models.ssh_profile import SSHProfile
 
-from core.asset_path import get_asset_path
+from oposqueue.models.ssh_profile import SSHProfile
+from oposqueue.core.asset_path import get_asset_path
 
 class ProfileManager:
     def __init__(self, directory=get_asset_path("storage/profiles/")):

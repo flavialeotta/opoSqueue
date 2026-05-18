@@ -1,9 +1,9 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel
 from PySide6.QtCore import Qt
-from core.profile_manager import profile_manager
-from ui.widgets.save_slot_widget import SaveSlotWidget
-from ui.widgets.fonts import CustomFont
-from core.asset_path import get_asset_path
+from oposqueue.core.profile_manager import profile_manager
+from oposqueue.ui.widgets.save_slot_widget import SaveSlotWidget
+from oposqueue.ui.widgets.fonts import CustomFont
+from oposqueue.core.asset_path import get_asset_path
 
 class SaveSelectScreen(QWidget):
     def __init__(self, on_profile_selected, on_back):
