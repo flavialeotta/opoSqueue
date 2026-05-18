@@ -1,5 +1,5 @@
 # OpoSqueue v0.1.0
-<img src="src/oposqueue/ui/logo.png" alt="logo" width="100"/>
+<img src="src/oposqueue/ui/logo.png" alt="logo" width="200"/>
 
 ## Introduction
 OpoSqueue (or OpoSQ for short), is a Python-based CLI tool that allows the user to connect to a remote server (through SSH) and monitor the HPC jobs that are currently queued and running. If you are tired of typing "squeue" every other minute to check the status of your analysis, just run OpoSqueue through your Command Line and enjoy a window that will update every 5 seconds with the nodes status!
