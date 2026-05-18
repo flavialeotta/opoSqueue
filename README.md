@@ -1,5 +1,39 @@
 # OpoSqueue v0.1.0
 
+## Introduction
+OpoSqueue (or OpoSQ for short), is a Python-based CLI tool that allows the user to connect to a remtoe server (through SSH) and monitor the HPC jobs that are currently running and queued. If you are tired of typing "squeue" every other minute to check the status of your analysis, just run OpoSqueue through your Command Line and enjoy a window that will update every 5 seconds with the nodes status!
+
+This tool is expected to get soon other updates, mostly regarding its appearance, but if you have any suggestions regarding additional functionalities that could be useful for your every-day work, feel free to contact me.
+
+## 0. Set-Up
+GUI support is required on the user system, so it is recommended to install opoSqueue on your local computer, not on the cluster login node. Your computer will also need Python >=3.11, so make sure to have the correct version (run `python --version`) or [download it](https://www.python.org/downloads/). To install this package simply clone the repository running this command through the Terminal:
+
+```bash
+pip install git+https://github.com/flavialeotta/opoSqueue.git
+```
+
+The installation will automatically take care of the dependencies, but it is also possible to manually install them by running the command:
+
+```bash
+pip install requirements.txt
+```
+
+## 1. How to run
+To run opoSqueue simply type:
+
+```bash
+oposqueue
+```
+
+and you're good to go!
+
+### Save your connection details
+
+### Access saved connections
+
+### Main window
+
+## 2. Components
 Package asyncio:
 
 1. Synchronous functions
@@ -22,3 +56,6 @@ Components of opoSqueue:
 
 2. ui/window/titlescreen.py
 - class TitleScreen():
+
+## 3. Contacts
+

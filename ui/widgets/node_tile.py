@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt
 class NodeTile(QFrame):
     def __init__(self, node_name, status, allocated_cpus, total_cpus, user="---", is_highlighted=False):
         super().__init__()
-        self.setFixedSize(95, 105) # Sized for readability
+        self.setFixedSize(95, 105)
         layout = QVBoxLayout()
         layout.setContentsMargins(4, 4, 4, 4)
         layout.setSpacing(2)
@@ -43,7 +43,7 @@ class NodeTile(QFrame):
 
     def get_color(self, status):
         s = status.lower()
-        if "idle" in s: return "#2ecc71" # Green
-        if "alloc" in s: return "#e74c3c" # Red
-        if "mix" in s: return "#f1c40f"   # Yellow
-        return "#555" # Gray (Down)
+        if "idle" in s: return "#2ecc71"
+        if "alloc" in s: return "#e74c3c"
+        if "mix" in s: return "#f1c40f"
+        return "#555"

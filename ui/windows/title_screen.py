@@ -71,12 +71,11 @@ class TitleScreen(QWidget):
         self.gif_label = QLabel()
         self.gif_label.setAlignment(Qt.AlignCenter)
 
-        # Load the movie (replace with your path)
+        # Load the movie
         self.movie = QMovie("ui/sprites/opossum_sprite.gif")
-        # Plan B: The Sharp-Scaler
-        self.movie.setCacheMode(QMovie.CacheAll) # Makes it faster
+        # Scaler
+        self.movie.setCacheMode(QMovie.CacheAll)
 
-        # This signal fires every time the GIF moves to the next frame
         self.movie.frameChanged.connect(lambda: self.gif_label.setPixmap(
             self.movie.currentPixmap().scaled(210, 210, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         ))
@@ -97,7 +96,6 @@ class TitleScreen(QWidget):
 
         self.setLayout(layout)
 
-        # Keep references alive
         self.connection_dialog = None
         self.save_select_screen = None
 
@@ -112,14 +110,7 @@ class TitleScreen(QWidget):
         self.connection_dialog = ConnectionDialog(self.handle_connection)
 
     def open_save_select(self):
-        # We REMOVE the logic here because TitleScreen doesn't own the stack 
-        # and doesn't own the SaveSelectScreen.
         pass
-
-    #def handle_connection(self, profile, password):
-        #asyncio.create_task(
-            #elf.connect_to_cluster(profile, password)
-        #)
 
     def handle_saved_profile(self, profile):
         print("Selected profile:", profile.name)

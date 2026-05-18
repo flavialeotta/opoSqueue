@@ -18,7 +18,6 @@ class ConnectionDialog(QWidget):
         self.on_connect = on_connect
         self.setWindowTitle("New Connection")
 
-        # Initialize the font specifically for this screen
         self.objs_font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=12)
         pixel_font = self.objs_font.pixel_font
 
@@ -54,7 +53,6 @@ class ConnectionDialog(QWidget):
         self.save_checkbox = QCheckBox("Save profile")
         self.save_checkbox.setFont(pixel_font)
 
-        # Set widths
         for widget in [self.name_input, self.host_input, self.username_input, self.password_input, self.save_checkbox]:
             widget.setFixedWidth(300)
 
@@ -66,9 +64,9 @@ class ConnectionDialog(QWidget):
         self.back_button = QPushButton("Cancel")
         self.back_button.setFont(pixel_font)
 
-        # Add to layout
+
         layout.addWidget(header)
-        layout.addSpacing(10) # A little gap
+        layout.addSpacing(10)
         layout.addWidget(self.name_input)
         layout.addWidget(self.host_input)
         layout.addWidget(self.username_input)

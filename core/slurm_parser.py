@@ -11,7 +11,6 @@ def parse_squeue(raw: str):
     for line in lines:
         parts = line.split(DELIMITER)
 
-        # We expect 9 parts now because we'll add CPU count to the command
         if len(parts) != 9:
             continue
 
@@ -24,7 +23,7 @@ def parse_squeue(raw: str):
                 state=parts[4],
                 runtime=parts[5],
                 nodes=parts[6],   # This will now be the node list (e.g., "node01")
-                cpus=int(parts[7]), # New field
+                cpus=int(parts[7]),
                 reason=parts[8],
             )
         )
@@ -47,8 +46,8 @@ def parse_sinfo(raw: str):
                 name=parts[0],
                 partition=parts[1],
                 state=parts[2],
-                cpus_alloc=int(cpu_data[0]), # First number is allocated
-                cpus_total=int(cpu_data[3]), # Last number is total
+                cpus_alloc=int(cpu_data[0]),
+                cpus_total=int(cpu_data[3]),
             )
         )
     return nodes

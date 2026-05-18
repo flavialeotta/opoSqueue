@@ -12,11 +12,10 @@ class ClusterView(QWidget):
     def __init__(self):
         super().__init__()
         self.objs_font = CustomFont("ui/fonts/FROGBLOCK-V2.1-by-Polyducks.ttf", size=12)
-        
-        # 1. Main Layout
+
         self.main_container = QVBoxLayout()
         
-        # 2. Top Bar (Back Button + User Search/Filter)
+        # Top Bar (Back Button + User Search/Filter)
         top_bar = QHBoxLayout()
         self.back_button = QPushButton("BACK")
         self.back_button.setFont(self.objs_font.pixel_font)
@@ -30,10 +29,9 @@ class ClusterView(QWidget):
         top_bar.addWidget(self.back_button)
         top_bar.addWidget(self.filter_input)
         
-        # 3. Legend
+        # Legend
         self.legend_layout = self.create_legend()
         
-        # 4. Content Area (Grid Scroll Area + Right Panel)
         content_layout = QHBoxLayout()
         
         self.grid = QGridLayout()
@@ -52,7 +50,7 @@ class ClusterView(QWidget):
         content_layout.addWidget(scroll, 3)
         content_layout.addWidget(self.queue_panel, 1)
         
-        # Assemble Main Layout
+        # Main Layout
         self.main_container.addLayout(top_bar)
         self.main_container.addLayout(self.legend_layout)
         self.main_container.addLayout(content_layout)
@@ -74,7 +72,6 @@ class ClusterView(QWidget):
         return legend
 
     def refresh(self):
-        # Clear Grid safely
         while self.grid.count():
             child = self.grid.takeAt(0)
             if child.widget():
@@ -82,8 +79,7 @@ class ClusterView(QWidget):
 
         target_user = self.filter_input.text().strip().lower()
         
-        # Handle Node Duplication (Server Architecture)
-        # We use a set to keep track of names we've already drawn
+
         seen_nodes = set()
         
         row, col = 0, 0
@@ -92,7 +88,7 @@ class ClusterView(QWidget):
                 continue
             seen_nodes.add(node.name)
 
-            # Find user on this node
+            
             node_user = ""
             is_me = False
             
@@ -114,8 +110,7 @@ class ClusterView(QWidget):
             self.grid.addWidget(tile, row, col)
             
             col += 1
-            if col > 7: # 8 columns wide
+            if col > 7:
                 col = 0
                 row += 1
         
-        # Important: No job labels here! They are handled by JobQueuePanel.

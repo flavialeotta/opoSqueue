@@ -33,7 +33,6 @@ class ProfileManager:
         path = os.path.join(self.directory, filename)
         
         with open(path, "w") as f:
-            # Pydantic models use .model_dump() in newer versions or .dict() in older
             data = profile.model_dump() if hasattr(profile, 'model_dump') else profile.dict()
             json.dump(data, f, indent=4)
 
@@ -43,5 +42,4 @@ class ProfileManager:
         with open(self.filename, "w") as f:
             json.dump([p.dict() if hasattr(p, 'dict') else p.__dict__ for p in profiles], f, indent=4)
 
-# Create a single instance to use everywhere
 profile_manager = ProfileManager()
