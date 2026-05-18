@@ -111,7 +111,8 @@ class TitleScreen(QWidget):
         QApplication.instance().quit()
     
     def open_connection_dialog(self):
-        self.connection_dialog = ConnectionDialog(self.handle_connection)
+        self.connection_dialog = ConnectionDialog(self.connect_to_cluster)
+        self.connection_dialog.show()
 
     def open_save_select(self):
         pass
