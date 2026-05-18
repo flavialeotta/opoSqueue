@@ -19,7 +19,7 @@ from oposqueue.core.polling_service import PollingService
 from oposqueue.ui.windows.cluster_view import ClusterView
 from oposqueue.ui.widgets.fonts import CustomFont
 
-from core.asset_path import get_asset_path
+from oposqueue.core.asset_path import get_asset_path
 
 # Title Screen is defined as a child of class QWidget
 class TitleScreen(QWidget): 

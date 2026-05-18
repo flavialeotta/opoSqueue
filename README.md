@@ -57,5 +57,17 @@ Components of opoSqueue:
 2. ui/window/titlescreen.py
 - class TitleScreen():
 
-## 3. Contacts
+## 3. Possible problems
+### WARNING: The script oposqueue.exe is installed in '...' which is not on PATH.
+This is usually a local configuration problem, which can be easily solved. Locate the path that is provided by the warning message (usually something along the line of 'C:\Users\name of the user\intermediate folders\Python\pythoncore-version\Scripts')
+
+Run this PowerShell command:
+
+```PowerShell
+[Environment]::SetEnvironmentVariable("Path", $env:Path + "; path given by the error message", "User")
+```
+
+Do not change "User" for your user name. Then, restart your Terminal window.
+
+## 4. Contacts
 
