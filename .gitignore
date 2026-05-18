@@ -1,4 +1,4 @@
-**/storage/profiles/*
+**src/oposqueue/storage/profiles/*.json
 **/!storage/profiles/.gitkeep
 **/__pycache__/
 *.pyc
