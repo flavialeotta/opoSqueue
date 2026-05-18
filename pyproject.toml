@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oposqueue"
+version = "0.1.0"
+description = "opoSqueue cluster SSH and Slurm GUI client"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "annotated-types==0.7.0",
+    "asyncssh==2.23.0",
+    "cffi==2.0.0",
+    "cryptography==48.0.0",
+    "pycparser==3.0",
+    "pydantic==2.13.4",
+    "pydantic-core==2.46.4",
+    "PySide6==6.11.1",
+    "PySide6_Addons==6.11.1",
+    "PySide6_Essentials==6.11.1",
+    "qasync==0.28.0",
+    "shiboken6==6.11.1",
+    "typing-inspection==0.4.2",
+    "typing-extensions==4.15.0",
+]
+
+[project.scripts]
+oposqueue = "main:main"
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+include = ["core", "core.*", "models", "models.*", "ui", "ui.*"]

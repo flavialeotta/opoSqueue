@@ -1,4 +1,4 @@
-# OpoSqueue v1.0
+# OpoSqueue v0.1.0
 
 Package asyncio:
 

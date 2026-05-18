@@ -109,9 +109,10 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(f"Connection Error: {e}")
 
-if __name__ == "__main__":
+
+def main():
     app = QApplication(sys.argv)
-    
+
     # This setup handles the "Opossum" shutdown perfectly
     loop = QEventLoop(app)
     asyncio.set_event_loop(loop)
@@ -126,3 +127,7 @@ if __name__ == "__main__":
         pass
     finally:
         print("Opossum is going to sleep. Goodbye!")
+
+
+if __name__ == "__main__":
+    main()
