@@ -38,13 +38,17 @@ class ClusterView(QWidget):
         
         self.grid = QGridLayout()
         self.grid.setSpacing(5)
+        self.grid.setAlignment(Qt.AlignTop)  
         
         grid_widget = QWidget()
         grid_widget.setLayout(self.grid)
+        grid_widget.setStyleSheet("background-color: #0a0a0a;")
         
         scroll = QScrollArea()
         scroll.setWidget(grid_widget)
         scroll.setWidgetResizable(True)
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         scroll.setStyleSheet("background-color: #0a0a0a; border: none;")
         
         self.queue_panel = JobQueuePanel()
@@ -58,10 +62,25 @@ class ClusterView(QWidget):
         self.main_container.addLayout(content_layout)
         
         self.setLayout(self.main_container)
+        self.back_button.clicked.connect(self.handle_back_click)
 
         # Signals
         state_store.nodes_updated.connect(self.refresh)
         state_store.jobs_updated.connect(self.refresh)
+
+    def handle_back_click(self):
+        top_window = self.window()
+        
+        self.hide()
+        
+        if top_window:
+            top_window.setMinimumSize(0, 0)
+            top_window.setMaximumSize(16777215, 16777215)
+            
+            top_window.resize(580, 500) 
+            
+            if hasattr(top_window, 'title_screen') and top_window.title_screen:
+                top_window.title_screen.show()
 
     def create_legend(self):
         legend = QHBoxLayout()
