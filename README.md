@@ -1,6 +1,6 @@
 # OpoSqueue v0.1.1
 
-<img src="src/oposqueue/ui/logo.png"alt="logo" width="200"/>
+<img src="src/oposqueue/ui/logo.png" alt="logo" width="200"/>
 
 ## Introduction
 
@@ -48,13 +48,13 @@ oposqueue
 
 and you're good to go! It will open the following window:
 
-<img src="src/oposqueue/storage/static/main_window.png"alt="main page" width="500"/>
+<img src="src/oposqueue/storage/static/main_window.png" alt="main page" width="500"/>
 
 ### Save your connection details
 
 To start a new connection, click on "New Connection. This button will redirect you to the following window:
 
-<img src="src/oposqueue/storage/static/new_connection.png"alt="new connection" width="500"/>
+<img src="src/oposqueue/storage/static/new_connection.png" alt="new connection" width="500"/>
 
 and you can fill in the required fields:
 
@@ -67,7 +67,7 @@ and you can fill in the required fields:
 
 Once the connection is established you will be redirected to the cluster view of your HPC nodes.
 
-<img src="src/oposqueue/storage/static/cluster_view.png"alt="cluster" width="600"/>
+<img src="src/oposqueue/storage/static/cluster_view.png" alt="cluster" width="600"/>
 
 This window not only shows an overview of all the nodes available in the HPC cluster and their statuses, but also a list of queued jobs (on the right). Each node also displays the number of CPUs available and allocated, as well as the name of the user currently running analyses on that node and a color-coded 'window' depending on its status:
 
@@ -82,11 +82,11 @@ The status of each node is updated every 5 seconds. An interesting feature of op
 
 If you have ticked "Save connection" when providing connection's data, the next time you will open opoSqueue, a new button will appear: continue.
 
-<img src="src/oposqueue/storage/static/continue.png"alt="continue" width="600"/>
+<img src="src/oposqueue/storage/static/continue.png" alt="continue" width="600"/>
 
 Once you click on that button, you will be redirected to a list of all the connections previously saved. To connect again, select "Connect" and provide your password in the pop-up window:
 
-<img src="src/oposqueue/storage/static/continue_credentials.png"alt="credentials" width="600"/>
+<img src="src/oposqueue/storage/static/continue_credentials.png" alt="credentials" width="600"/>
 
 ## 3. Components
 
