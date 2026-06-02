@@ -1,21 +1,30 @@
 # OpoSqueue v0.1.1
-<img src="src/oposqueue/ui/logo.png" alt="logo" width="200"/>
+
+<img src="src/oposqueue/ui/logo.png"alt="logo" width="200"/>
 
 ## Introduction
+
 OpoSqueue (or OpoSQ for short), is a Python-based CLI tool that allows the user to connect to a remote server (through SSH) and monitor the HPC jobs that are currently queued and running. If you are tired of typing "squeue" every other minute to check the status of your analysis, just run OpoSqueue through your Command Line and enjoy a window that will update every 5 seconds with the nodes status!
 
 This tool is expected to get soon other updates, mostly regarding its appearance, but if you have any suggestions about additional functionalities that could be useful for your every-day work, feel free to contact me.
 
 ## Table of Contents
-- [0. Set-Up](#0-set-up)
-- [1. How to run](#1-how-to-run)
-- [2. Components](#2-components)
-- [3. Contributing and support](#3-contributing-and-support)
-- [4. Possible problems](#4-possible-problems)
-- [5. Contacts](#5-contacts)
 
-## 0. Set-Up
-GUI support is required on the user system, so it is recommended to install opoSqueue on your local computer, not on the cluster login node. Your computer will also need Python >=3.11, so make sure to have the correct version (run `python --version`) or [download it](https://www.python.org/downloads/). 
+- [0. What's new?](#0-whats-new)
+- [1. Set-Up](#1-set-up)
+- [2. How to run](#2-how-to-run)
+- [3. Components](#3-components)
+- [4. Contributing and support](#4-contributing-and-support)
+- [5. Possible problems](#5-possible-problems)
+- [6. Contacts](#6-contacts)
+
+### 0. What’s new?
+
+- **v0.1.1** (02/06/2026): Added information on allocated memory for each job and memory usage percentage information in the cluster view window. It is only displayed for running jobs.
+
+## 1. Set-Up
+
+GUI support is required on the user system, so it is recommended to install opoSqueue on your local computer, not on the cluster login node. Your computer will also need Python >=3.11, so make sure to have the correct version (run `python --version`) or [download it](https://www.python.org/downloads/).
 
 Once you have the correct version of Python, install this package by simply cloning the repository running this command through the Terminal:
 
@@ -29,7 +38,8 @@ The installation will automatically take care of the dependencies, but it is als
 pip install -r requirements.txt
 ```
 
-## 1. How to run
+## 2. How to run
+
 To run opoSqueue simply type:
 
 ```bash
@@ -38,12 +48,13 @@ oposqueue
 
 and you're good to go! It will open the following window:
 
-<img src="src/oposqueue/storage/static/main_window.png" alt="main page" width="500"/>
+<img src="src/oposqueue/storage/static/main_window.png"alt="main page" width="500"/>
 
 ### Save your connection details
+
 To start a new connection, click on "New Connection. This button will redirect you to the following window:
 
-<img src="src/oposqueue/storage/static/new_connection.png" alt="new connection" width="500"/>
+<img src="src/oposqueue/storage/static/new_connection.png"alt="new connection" width="500"/>
 
 and you can fill in the required fields:
 
@@ -53,9 +64,10 @@ and you can fill in the required fields:
 - *'Password'*: the server's account Password. **Important: opoSqueue NEVER stores your passwords!**.
 
 ### Main window
+
 Once the connection is established you will be redirected to the cluster view of your HPC nodes.
 
-<img src="src/oposqueue/storage/static/cluster_view.png" alt="cluster" width="600"/>
+<img src="src/oposqueue/storage/static/cluster_view.png"alt="cluster" width="600"/>
 
 This window not only shows an overview of all the nodes available in the HPC cluster and their statuses, but also a list of queued jobs (on the right). Each node also displays the number of CPUs available and allocated, as well as the name of the user currently running analyses on that node and a color-coded 'window' depending on its status:
 
@@ -66,20 +78,18 @@ This window not only shows an overview of all the nodes available in the HPC clu
 
 The status of each node is updated every 5 seconds. An interesting feature of opoSqueue is the possibility of searching for a specific Username (on the top bar) which will promptly highlight any node currently used by that same user. This gives a quick access on the status of your analyses: once no node is highlighted, all your analyses will have finished!
 
-### What’s new?
-- **v0.1.1** (02/06/2026): Added information on allocated memory for each job and memory usage percentage information in the cluster view window. It is only displayed for running jobs.
-
 ### Access saved connections
 
 If you have ticked "Save connection" when providing connection's data, the next time you will open opoSqueue, a new button will appear: continue.
 
-<img src="src/oposqueue/storage/static/continue.png" alt="continue" width="600"/>
+<img src="src/oposqueue/storage/static/continue.png"alt="continue" width="600"/>
 
 Once you click on that button, you will be redirected to a list of all the connections previously saved. To connect again, select "Connect" and provide your password in the pop-up window:
 
-<img src="src/oposqueue/storage/static/continue_credentials.png" alt="credentials" width="600"/>
+<img src="src/oposqueue/storage/static/continue_credentials.png"alt="credentials" width="600"/>
 
-## 2. Components
+## 3. Components
+
 Folder structure:
 
 ```text
@@ -167,7 +177,7 @@ Components of opoSqueue:
    - Stores app assets and saved connection profiles.
    - `static` holds images used in the README and the GUI, while `profiles` stores saved SSH connection slots.
 
-## 3. Contributing and support
+## 4. Contributing and support
 
 If you find a bug, want to request a feature, or would like to contribute, here is the best way to help:
 
@@ -194,8 +204,10 @@ If you find a bug, want to request a feature, or would like to contribute, here 
 
 If you do not want to use GitHub issues, you can contact me directly by email (see below).
 
-## 4. Possible problems
-### WARNING: The script oposqueue.exe is installed in '...' which is not on PATH.
+## 5. Possible problems
+
+### WARNING: The script oposqueue.exe is installed in '...' which is not on PATH
+
 This is usually a local configuration problem, which can be easily solved. Locate the path that is provided by the warning message (usually something along the line of 'C:\Users\name of the user\intermediate folders\Python\pythoncore-version\Scripts')
 
 Run this PowerShell command:
@@ -207,11 +219,13 @@ Run this PowerShell command:
 Do not change "User" for your user name. Then, restart your Terminal window.
 
 ### -bash: pip: command not found
+
 When trying to install opoSqueue, if the computer doesn't have Python's package manager (pip) installed, the action will fail. You can try to download pip itself, or bypass it by running the following command:
 
 ```bash
 python3 -m pip install git+https://github.com/flavialeotta/opoSqueue.git --user
 ```
+
 If this will also fail, it might be due to a version of Python that is too old (<3.11) so please check your Python version and update if needed.
 
 If you are located on a server, though, and have admin restrictions that prevent you from updating Python, I warmly suggest you to use opoSqueue on your personal computer and remotely connect to the server through the app itself.
@@ -224,7 +238,8 @@ It is vividly recommended to install and run opoSqueue on your local computer (W
 
 If you must run on a remote server, on the internet there are guides on how to set up a desktop-enabled remote session using X11 forwarding (`ssh -X user@server`), VNC (Virtual Network Computing) or graphical remote desktop application (RDP, TeamViewer, etc.). I have not tried these solutions yet so I cannot personally recommend this approach.
 
-## 5. Contacts
+## 6. Contacts
+
 For any type of inquiries, bug reports, or feature requests, you can contact me at:
 
 - Personal: `flavia.leotta@hotmail.com`
