@@ -22,6 +22,13 @@ class JobQueuePanel(QWidget):
 
         for job in state_store.jobs:
             color = "#FFD700" if job.state == "RUNNING" else "#FFFFFF"
-            lbl = QLabel(f"[{job.job_id}] {job.user} | {job.runtime}")
+            
+            # Build job info string with memory info if available
+            job_info = f"[{job.job_id}] {job.user} | {job.runtime}"
+            
+            if job.allocated_memory:
+                job_info += f" | {job.allocated_memory}MB"
+            
+            lbl = QLabel(job_info)
             lbl.setStyleSheet(f"color: {color}; font-size: 10px;")
             self.side_layout.addWidget(lbl)

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class Job(BaseModel):
@@ -11,3 +12,6 @@ class Job(BaseModel):
     nodes: str
     cpus: int
     reason: str
+    allocated_memory: Optional[int] = None  # in MB
+    memory_used: Optional[int] = None  # in MB (when available)
+    memory_percent: Optional[float] = None  # percentage used

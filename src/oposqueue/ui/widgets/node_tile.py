@@ -1,14 +1,15 @@
 from PySide6.QtWidgets import QFrame, QLabel, QVBoxLayout
-from PySide6.QtGui import QFont
+# from PySide6.QtGui import QFont
 from PySide6.QtCore import Qt
 
 class NodeTile(QFrame):
-    def __init__(self, node_name, status, allocated_cpus, total_cpus, user="---", is_highlighted=False):
+    def __init__(self, node_name, status, allocated_cpus, total_cpus, user="---", is_highlighted=False, job_id="", allocated_memory=None, memory_used=None, memory_percent=None):
         super().__init__()
-        self.setFixedSize(95, 105)
+        tile_height = 135 if (allocated_memory or memory_used) else 105
+        self.setFixedSize(95, tile_height)
         layout = QVBoxLayout()
         layout.setContentsMargins(4, 4, 4, 4)
-        layout.setSpacing(2)
+        layout.setSpacing(1)
 
         # 1. Node Name
         name_lbl = QLabel(node_name)
@@ -35,6 +36,30 @@ class NodeTile(QFrame):
         layout.addWidget(cpu_lbl)
         layout.addWidget(self.icon)
         layout.addWidget(user_lbl)
+        
+        # 5. Memory info if available
+        if memory_used and allocated_memory and memory_percent is not None:
+            percent_display = f"MEM: {memory_percent:.0f}%"
+            memory_lbl = QLabel(percent_display)
+            memory_lbl.setAlignment(Qt.AlignCenter)
+            memory_lbl.setStyleSheet("font-size: 8px; color: #00FF00;")
+            layout.addWidget(memory_lbl)
+        elif allocated_memory:
+            if allocated_memory >= 1024:
+                mem_display = f"{allocated_memory / 1024:.1f}GB"
+            else:
+                mem_display = f"{allocated_memory}MB"
+            memory_lbl = QLabel(f"MEM: {mem_display}")
+            memory_lbl.setAlignment(Qt.AlignCenter)
+            memory_lbl.setStyleSheet("font-size: 8px; color: #00FF00;")
+            layout.addWidget(memory_lbl)
+        elif memory_used:
+            used_display = f"{memory_used / 1024:.1f}GB" if memory_used >= 1024 else f"{memory_used}MB"
+            memory_lbl = QLabel(f"MEM USED: {used_display}")
+            memory_lbl.setAlignment(Qt.AlignCenter)
+            memory_lbl.setStyleSheet("font-size: 8px; color: #00FF00;")
+            layout.addWidget(memory_lbl)
+        
         self.setLayout(layout)
 
         # Highlight the whole frame if it's the user's node

@@ -112,10 +112,18 @@ class ClusterView(QWidget):
             
             node_user = ""
             is_me = False
+            job_id = ""
+            allocated_memory = None
+            memory_used = None
+            memory_percent = None
             
             for job in state_store.jobs:
                 if job.state == "RUNNING" and node.name in job.nodes:
                     node_user = job.user
+                    job_id = job.job_id
+                    allocated_memory = job.allocated_memory
+                    memory_used = job.memory_used
+                    memory_percent = job.memory_percent
                     if target_user != "" and target_user in job.user.lower():
                         is_me = True
                     break 
@@ -126,7 +134,11 @@ class ClusterView(QWidget):
                 allocated_cpus=getattr(node, 'cpus_alloc', 0), 
                 total_cpus=node.cpus_total,
                 user=node_user,
-                is_highlighted=is_me
+                is_highlighted=is_me,
+                job_id=job_id,
+                allocated_memory=allocated_memory,
+                memory_used=memory_used,
+                memory_percent=memory_percent
             )
             self.grid.addWidget(tile, row, col)
             

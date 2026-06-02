@@ -1,4 +1,4 @@
-# OpoSqueue v0.1.0
+# OpoSqueue v0.1.1
 <img src="src/oposqueue/ui/logo.png" alt="logo" width="200"/>
 
 ## Introduction
@@ -65,6 +65,9 @@ This window not only shows an overview of all the nodes available in the HPC clu
 - grey: down (lost connection to the node).
 
 The status of each node is updated every 5 seconds. An interesting feature of opoSqueue is the possibility of searching for a specific Username (on the top bar) which will promptly highlight any node currently used by that same user. This gives a quick access on the status of your analyses: once no node is highlighted, all your analyses will have finished!
+
+### What’s new?
+- **v0.1.1** (02/06/2026): Added information on allocated memory for each job and memory usage percentage information in the cluster view window. It is only displayed for running jobs.
 
 ### Access saved connections
 
