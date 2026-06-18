@@ -43,6 +43,8 @@ class ClusterView(QWidget):
         grid_widget = QWidget()
         grid_widget.setLayout(self.grid)
         grid_widget.setStyleSheet("background-color: #0a0a0a;")
+
+        self.grid.setSizeConstraint(QGridLayout.SetMinAndMaxSize)
         
         scroll = QScrollArea()
         scroll.setWidget(grid_widget)
@@ -81,6 +83,12 @@ class ClusterView(QWidget):
             
             if hasattr(top_window, 'title_screen') and top_window.title_screen:
                 top_window.title_screen.show()
+            
+            top_window.adjustSize()
+    
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.refresh()
 
     def create_legend(self):
         legend = QHBoxLayout()
@@ -99,9 +107,11 @@ class ClusterView(QWidget):
                 child.widget().deleteLater()
 
         target_user = self.filter_input.text().strip().lower()
-        
-
         seen_nodes = set()
+
+        available_width = max(100, self.width() - 350)
+        tile_width = 115 
+        max_cols = max(1, available_width // tile_width)
         
         row, col = 0, 0
         for node in state_store.nodes:
@@ -109,8 +119,7 @@ class ClusterView(QWidget):
                 continue
             seen_nodes.add(node.name)
 
-            
-            node_user = ""
+            unique_users = set()
             is_me = False
             job_id = ""
             allocated_memory = None
@@ -119,14 +128,18 @@ class ClusterView(QWidget):
             
             for job in state_store.jobs:
                 if job.state == "RUNNING" and node.name in job.nodes:
-                    node_user = job.user
+                    unique_users.add(job.user)
+
                     job_id = job.job_id
                     allocated_memory = job.allocated_memory
                     memory_used = job.memory_used
                     memory_percent = job.memory_percent
+
                     if target_user != "" and target_user in job.user.lower():
                         is_me = True
-                    break 
+                    #break 
+
+            node_user = ", ".join(unique_users) if unique_users else ""
 
             tile = NodeTile(
                 node_name=node.name,
@@ -143,7 +156,7 @@ class ClusterView(QWidget):
             self.grid.addWidget(tile, row, col)
             
             col += 1
-            if col > 7:
+            if col >= max_cols:
                 col = 0
                 row += 1
         
