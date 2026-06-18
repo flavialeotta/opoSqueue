@@ -19,7 +19,7 @@ class JobQueuePanel(QWidget):
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
         self.scroll.setStyleSheet("background-color: #1a1a1a; border: none;")
-        self.scroll.setHorizontalScrollBarPolicy(Qt.HorizontalScrollBarPolicy.ScrollBarAlwaysOff)
+        #self.scroll.setHorizontalScrollBarPolicy(Qt.HorizontalScrollBarPolicy.ScrollBarAlwaysOff)
 
         self.container_widget = QWidget()
         self.side_layout = QVBoxLayout(self.container_widget)
