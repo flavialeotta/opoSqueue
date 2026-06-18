@@ -115,9 +115,11 @@ def main():
         with loop:
             loop.run_forever()
     except KeyboardInterrupt:
-        pass
+        print("\nShutting down gracefully...")
     finally:
         print("Opossum is going to sleep. Goodbye!")
+        app.quit()
+        sys.exit(0)
 
 
 if __name__ == "__main__":
