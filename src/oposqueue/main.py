@@ -1,5 +1,6 @@
 import sys
 import asyncio
+import signal
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QInputDialog, QLineEdit, QPushButton
 from qasync import QEventLoop
@@ -111,13 +112,22 @@ def main():
     main_window = MainWindow()
     main_window.show()
 
+
+    def handle_exit_signal(sig, frame):
+        print("\nOpossum is going to sleep. Goodbye!")
+        if loop.is_running():
+            loop.stop()
+        QApplication.quit()
+        sys.exit(0)
+    signal.signal(signal.SIGINT, handle_exit_signal)
+
     try:
         with loop:
             loop.run_forever()
     except KeyboardInterrupt:
         print("\nShutting down gracefully...")
+        pass
     finally:
-        print("Opossum is going to sleep. Goodbye!")
         app.quit()
         sys.exit(0)
 
