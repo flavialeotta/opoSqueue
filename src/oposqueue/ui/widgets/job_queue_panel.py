@@ -4,7 +4,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QScrollArea,
 )
-
+from PySide6.QtCore import Qt
 from oposqueue.core.state_store import state_store
 
 
