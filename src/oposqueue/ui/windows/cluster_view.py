@@ -25,18 +25,18 @@ class ClusterView(QWidget):
         self.back_button.setFixedWidth(80)
         
         self.filter_input = QLineEdit()
-        self.filter_input.setPlaceholderText("Search User to highlight nodes...")
+        self.filter_input.setPlaceholderText("Search User or Job ID to highlight...")
         self.filter_input.setFont(self.objs_font.pixel_font)
         self.filter_input.textChanged.connect(self.refresh)
         
         top_bar.addWidget(self.back_button)
         top_bar.addWidget(self.filter_input)
         
-        # FIX 1: Wrap the legend in a QWidget to prevent it from stretching vertically
+        # Legend
         self.legend_widget = QWidget()
         self.legend_layout = self.create_legend()
         self.legend_widget.setLayout(self.legend_layout)
-        self.legend_widget.setFixedHeight(25) # Hard lock its size!
+        self.legend_widget.setFixedHeight(25)
         
         # Grid area for nodes
         self.grid = QGridLayout()
@@ -65,9 +65,12 @@ class ClusterView(QWidget):
         self.content_splitter.setStretchFactor(0, 3)
         self.content_splitter.setStretchFactor(1, 1)
         
-        # Assemble Main Layout Component Elements
+        # --- FIX 1: LIVE DRAGGING EVENT TRIGGER ---
+        # Fires self.refresh loop immediately as the splitter line handles move!
+        self.content_splitter.splitterMoved.connect(lambda pos, index: self.refresh())
+        
         self.main_container.addLayout(top_bar)
-        self.main_container.addWidget(self.legend_widget) # Add as widget!
+        self.main_container.addWidget(self.legend_widget) 
         self.main_container.addWidget(self.content_splitter) 
         
         self.setLayout(self.main_container)
@@ -91,7 +94,6 @@ class ClusterView(QWidget):
                 
             top_window.adjustSize()
 
-    # FIX 2: Dynamic resize handling without infinite recursion loops
     def resizeEvent(self, event):
         super().resizeEvent(event)
         self.refresh()
@@ -108,27 +110,28 @@ class ClusterView(QWidget):
         return legend
 
     def refresh(self):
-        # Prevent layout recalculation crashes if the view isn't fully built yet
         if not hasattr(self, 'scroll') or self.scroll is None:
             return
 
-        # Temporarily block signals to stop recursion loops during grid drawing
-        self.grid.invalidate()
+        # Explicitly forward the filter text query directly to the sidebar panel
+        target_filter = self.filter_input.text().strip().lower()
+        if hasattr(self, 'queue_panel') and self.queue_panel:
+            self.queue_panel.refresh(target_filter)
 
         while self.grid.count():
             child = self.grid.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
 
-        target_user = self.filter_input.text().strip().lower()
         seen_nodes = set()
         
-        # FIX 3: Safe, ironclad width calculations utilizing the scroll viewport bounds
-        available_width = self.scroll.viewport().width()
-        if available_width <= 100: 
-            available_width = 600 # Clean default fallback value for initial launch step
+        # --- FIX 2: ACCURATE RIGHT-GAP SPACE FILL MATH ---
+        # Fetch available viewport workspace room and subtract margins
+        available_width = self.scroll.width() - 25
+        if available_width <= 50:
+            available_width = 650
             
-        tile_width = 115 
+        tile_width = 110  # Reduced slightly to ensure tight grid box snapping
         max_cols = max(1, available_width // tile_width)
 
         row, col = 0, 0
@@ -138,7 +141,7 @@ class ClusterView(QWidget):
             seen_nodes.add(node.name)
 
             unique_users = set()
-            is_me = False
+            is_highlighted = False
             job_id = ""
             allocated_memory = None
             memory_used = None
@@ -147,13 +150,18 @@ class ClusterView(QWidget):
             for job in state_store.jobs:
                 if job.state == "RUNNING" and node.name in job.nodes:
                     unique_users.add(job.user)
+                    
                     job_id = job.job_id
                     allocated_memory = job.allocated_memory
                     memory_used = job.memory_used
                     memory_percent = job.memory_percent
                     
-                    if target_user != "" and target_user in job.user.lower():
-                        is_me = True
+                    # --- FIX 3: HIGHLIGHT MATCHES FOR BOTH USERNAME OR JOB ID ---
+                    if target_filter != "":
+                        if (target_filter in job.user.lower() or 
+                            target_filter in str(job.job_id).lower() or 
+                            target_filter in node.name.lower()):
+                            is_highlighted = True
 
             node_user = ", ".join(unique_users) if unique_users else ""
 
@@ -163,7 +171,7 @@ class ClusterView(QWidget):
                 allocated_cpus=getattr(node, 'cpus_alloc', 0), 
                 total_cpus=node.cpus_total,
                 user=node_user,
-                is_highlighted=is_me,
+                is_highlighted=is_highlighted, # Pass combined matches string flag state
                 job_id=job_id,
                 allocated_memory=allocated_memory,
                 memory_used=memory_used,
