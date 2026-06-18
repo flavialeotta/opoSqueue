@@ -11,8 +11,8 @@ from oposqueue.core.state_store import state_store
 class JobQueuePanel(QWidget):
     def __init__(self):
         super().__init__()
-        self.setFixedWidth(280)
-
+        #self.setFixedWidth(280)
+        self.setMinimumWidth(180)
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
 
@@ -45,7 +45,13 @@ class JobQueuePanel(QWidget):
                 job_info += f" | {job.allocated_memory}MB"
             
             lbl = QLabel(job_info)
-            lbl.setStyleSheet(f"color: {color}; font-size: 10px;")
+            lbl.setStyleSheet(f"""
+                color: {color}; 
+                font-family: 'Consolas', 'Courier New', monospace; 
+                font-size: 11px;
+                font-weight: 500;
+                line-height: 1.2;
+            """)
 
             lbl.setWordWrap(True) 
             self.side_layout.addWidget(lbl)

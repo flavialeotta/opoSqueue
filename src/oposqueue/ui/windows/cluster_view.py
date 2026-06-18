@@ -55,13 +55,18 @@ class ClusterView(QWidget):
         
         self.queue_panel = JobQueuePanel()
 
-        content_layout.addWidget(scroll, 3)
-        content_layout.addWidget(self.queue_panel, 1)
+        from PySide6.QtWidgets import QSplitter
+        self.content_splitter = QSplitter(Qt.Horizontal)
+        self.content_splitter.addWidget(scroll)            
+        self.content_splitter.addWidget(self.queue_panel)
+
+        self.content_splitter.setStretchFactor(0, 3)
+        self.content_splitter.setStretchFactor(1, 1)
         
         # Main Layout
         self.main_container.addLayout(top_bar)
         self.main_container.addLayout(self.legend_layout)
-        self.main_container.addLayout(content_layout)
+        self.main_container.addWidget(self.content_splitter)
         
         self.setLayout(self.main_container)
         self.back_button.clicked.connect(self.handle_back_click)
@@ -109,7 +114,7 @@ class ClusterView(QWidget):
         target_user = self.filter_input.text().strip().lower()
         seen_nodes = set()
 
-        available_width = max(100, self.width() - 350)
+        available_width = max(100, self.grid.parentWidget().width() - 20)
         tile_width = 115 
         max_cols = max(1, available_width // tile_width)
         
@@ -139,7 +144,7 @@ class ClusterView(QWidget):
                         is_me = True
                     #break 
 
-            node_user = ", ".join(unique_users) if unique_users else ""
+            node_user = ",\n ".join(unique_users) if unique_users else ""
 
             tile = NodeTile(
                 node_name=node.name,
